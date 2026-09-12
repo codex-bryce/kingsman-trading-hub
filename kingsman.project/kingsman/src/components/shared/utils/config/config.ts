@@ -1,9 +1,9 @@
 import { LocalStorageConstants, LocalStorageUtils } from "@deriv-com/utils";
 
 export const DERIV_WS_URL = "wss://ws.derivws.com/websockets/v3";
-export const DERIV_APP_ID = "80976";
+export const DERIV_APP_ID = "34nAYPcfTpVm7ngmDZ65r";
 // export const DERIV_REDIRECT_URL = 'https://hh6ws6mh-3000.inc1.devtunnels.ms/';
-export const DERIV_REDIRECT_URL = "https://www.kingsmantradinghub.com/";
+export const DERIV_REDIRECT_URL = "https://kingsman-trading-hub.vercel.app/";
 export const DERIV_OAUTH_URL = "https://oauth.deriv.com/oauth2/authorize";
 // export const CLIENT_ID = '33apmmZjV811fXnN8RT5h';
 export const CLIENT_ID = "33maQ2YfjFHTQCNRBmshf";
