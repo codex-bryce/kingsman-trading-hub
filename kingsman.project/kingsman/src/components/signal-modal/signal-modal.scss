@@ -1,0 +1,230 @@
+.signal-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(6px);
+  padding: 16px;
+
+  &__card {
+    background: #111827;
+    border-radius: 20px;
+    width: min(420px, 100%);
+    max-height: 92vh;
+    overflow-y: auto;
+    box-shadow:
+      0 24px 80px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(255, 255, 255, 0.07);
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px 0;
+
+    h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+  }
+
+  &__close {
+    background: rgba(255, 255, 255, 0.08);
+    border: none;
+    color: #aaa;
+    font-size: 18px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 6px 10px;
+    border-radius: 8px;
+    transition:
+      background 0.15s,
+      color 0.15s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+  }
+
+  &__body {
+    padding: 14px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__profile-card {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 60%, #1d4ed8 100%);
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 80px;
+
+    &-name {
+      font-size: 21px;
+      font-weight: 800;
+      color: #fff;
+      flex: 1;
+      line-height: 1.2;
+    }
+
+    &-strength {
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 12px;
+      padding: 10px 14px;
+      text-align: center;
+      flex-shrink: 0;
+      min-width: 76px;
+
+      .value {
+        font-size: 26px;
+        font-weight: 800;
+        color: #fff;
+        display: block;
+        line-height: 1;
+      }
+
+      .label {
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.65);
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        display: block;
+        margin-top: 3px;
+      }
+    }
+  }
+
+  &__info-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  &__info-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 13px 16px;
+
+    .label {
+      font-size: 10px;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #f9fafb;
+      display: block;
+      line-height: 1.2;
+    }
+  }
+
+  &__inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  &__input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    label {
+      font-size: 13px;
+      color: #d1d5db;
+      font-weight: 500;
+    }
+
+    input {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 13px 14px;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      width: 100%;
+      outline: none;
+      transition:
+        border-color 0.15s,
+        background 0.15s;
+
+      &:focus {
+        border-color: rgba(99, 179, 237, 0.5);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      /* Remove number input arrows */
+      &[type="number"]::-webkit-inner-spin-button,
+      &[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+      }
+      &[type="number"] {
+        -moz-appearance: textfield;
+      }
+    }
+  }
+
+  &__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 2px;
+  }
+
+  &__btn {
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition:
+      opacity 0.15s,
+      transform 0.1s;
+    letter-spacing: 0.2px;
+
+    &:hover {
+      opacity: 0.88;
+    }
+
+    &:active {
+      transform: scale(0.97);
+    }
+
+    &--secondary {
+      background: rgba(255, 255, 255, 0.09);
+      color: #f3f4f6;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    &--primary {
+      background: #2563eb;
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+    }
+  }
+}

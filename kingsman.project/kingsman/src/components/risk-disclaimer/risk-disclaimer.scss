@@ -1,0 +1,112 @@
+.risk-disclaimer-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+  animation: slide-in-left 0.5s ease-out;
+
+  &__btn {
+    background: #ffd700 !important; // Bright golden yellow
+    color: #000000 !important; // Black text for contrast
+    border: none !important;
+    padding: 8px 16px !important;
+    border-radius: 4px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.3s ease !important;
+
+    &:hover {
+      background: #ffc107 !important; // Darker golden yellow on hover
+      transform: translateY(-1px) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    &:active {
+      transform: translateY(0) !important;
+    }
+  }
+}
+
+.risk-disclaimer-modal {
+  &__content {
+    padding: 24px;
+  }
+
+  &__title {
+    margin-bottom: 20px;
+    text-align: center;
+    color: var(--brand-red-coral);
+  }
+
+  &__text {
+    line-height: 1.6;
+    margin-bottom: 16px;
+    text-align: justify;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+  }
+
+  &__understand-btn {
+    background: #ffd700 !important; // Bright golden yellow
+    color: #000000 !important; // Black text for contrast
+    border: none !important;
+    padding: 12px 32px !important;
+    border-radius: 4px !important;
+    font-weight: 600 !important;
+    min-width: 150px;
+
+    &:hover {
+      background: #ffc107 !important; // Darker golden yellow on hover
+    }
+  }
+}
+
+// Mobile optimizations
+@media (max-width: 768px) {
+  .risk-disclaimer-button {
+    bottom: 100px; // Account for mobile navigation and scrolling
+    left: 16px;
+    z-index: 1001; // Ensure it stays above content
+
+    &__btn {
+      font-size: 11px !important;
+      padding: 6px 12px !important;
+    }
+  }
+
+  .risk-disclaimer-modal {
+    &__content {
+      padding: 20px;
+    }
+
+    &__title {
+      font-size: 16px;
+    }
+
+    &__text {
+      font-size: 13px;
+    }
+
+    &__understand-btn {
+      padding: 10px 24px !important;
+      font-size: 13px !important;
+    }
+  }
+}
+
+// Animation for floating button
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

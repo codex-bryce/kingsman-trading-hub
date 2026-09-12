@@ -1,0 +1,334 @@
+<xml xmlns="http://www.w3.org/1999/xhtml" collection="false" is_dbot="true">
+  <variables>
+    <variable id="stake_var">Stake</variable>
+    <variable id="initial_stake_var">Initial Stake</variable>
+    <variable id="entry_prediction_var">Initial Prediction</variable>
+    <variable id="prediction_var">Prediction</variable>
+    <variable id="recovery_prediction_var">Recovery Prediction</variable>
+    <variable id="martingale_var">Martingale</variable>
+    <variable id="take_profit_var">Take Profit</variable>
+    <variable id="stop_loss_var">Stop Loss</variable>
+    <variable id="use_martingale_var">Use Martingale</variable>
+  </variables>
+  <block type="trade_definition" id="ai_scanner_trade_definition" deletable="false" x="0" y="40">
+    <statement name="TRADE_OPTIONS">
+      <block type="trade_definition_market" id="ai_scanner_market" deletable="false" movable="false">
+        <field name="MARKET_LIST">synthetic_index</field>
+        <field name="SUBMARKET_LIST">random_index</field>
+        <field name="SYMBOL_LIST">1HZ75V</field>
+        <next>
+          <block type="trade_definition_tradetype" id="ai_scanner_tradetype" deletable="false" movable="false">
+            <field name="TRADETYPECAT_LIST">digits</field>
+            <field name="TRADETYPE_LIST">overunder</field>
+            <next>
+              <block type="trade_definition_contracttype" id="ai_scanner_contracttype" deletable="false" movable="false">
+                <field name="TYPE_LIST">both</field>
+                <next>
+                  <block type="trade_definition_candleinterval" id="ai_scanner_candleinterval" deletable="false" movable="false">
+                    <field name="CANDLEINTERVAL_LIST">60</field>
+                    <next>
+                      <block type="trade_definition_restartbuysell" id="ai_scanner_restartbuysell" deletable="false" movable="false">
+                        <field name="TIME_MACHINE_ENABLED">FALSE</field>
+                        <next>
+                          <block type="trade_definition_restartonerror" id="ai_scanner_restartonerror" deletable="false" movable="false">
+                            <field name="RESTARTONERROR">TRUE</field>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="INITIALIZATION">
+      <block type="variables_set" id="ai_scanner_set_stake">
+        <field name="VAR" id="stake_var">Stake</field>
+        <value name="VALUE" strategy_value="stake">
+          <block type="math_number">
+            <field name="NUM">0.5</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="ai_scanner_set_initial_stake">
+            <field name="VAR" id="initial_stake_var">Initial Stake</field>
+            <value name="VALUE">
+              <block type="variables_get">
+                <field name="VAR" id="stake_var">Stake</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="ai_scanner_set_entry_prediction">
+                <field name="VAR" id="entry_prediction_var">Initial Prediction</field>
+                <value name="VALUE" strategy_value="entry_prediction">
+                  <block type="math_number">
+                    <field name="NUM">8</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="ai_scanner_set_recovery_prediction">
+                    <field name="VAR" id="recovery_prediction_var">Recovery Prediction</field>
+                    <value name="VALUE" strategy_value="recovery_prediction">
+                      <block type="math_number">
+                        <field name="NUM">5</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="ai_scanner_set_martingale">
+                        <field name="VAR" id="martingale_var">Martingale</field>
+                        <value name="VALUE" strategy_value="martingale">
+                          <block type="math_number">
+                            <field name="NUM">2</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="variables_set" id="ai_scanner_set_take_profit">
+                            <field name="VAR" id="take_profit_var">Take Profit</field>
+                            <value name="VALUE" strategy_value="take_profit">
+                              <block type="math_number">
+                                <field name="NUM">25</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="variables_set" id="ai_scanner_set_stop_loss">
+                                <field name="VAR" id="stop_loss_var">Stop Loss</field>
+                                <value name="VALUE" strategy_value="stop_loss">
+                                  <block type="math_number">
+                                    <field name="NUM">50</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="variables_set" id="ai_scanner_set_use_martingale">
+                                    <field name="VAR" id="use_martingale_var">Use Martingale</field>
+                                    <value name="VALUE" strategy_value="use_martingale">
+                                      <block type="logic_boolean">
+                                        <field name="BOOL">TRUE</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="variables_set" id="ai_scanner_set_prediction">
+                                        <field name="VAR" id="prediction_var">Prediction</field>
+                                        <value name="VALUE">
+                                          <block type="variables_get">
+                                            <field name="VAR" id="entry_prediction_var">Initial Prediction</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="SUBMARKET">
+      <block type="trade_definition_tradeoptions" id="ai_scanner_tradeoptions">
+        <mutation has_first_barrier="false" has_second_barrier="false" has_prediction="true"></mutation>
+        <field name="DURATIONTYPE_LIST">t</field>
+        <field name="TRADE_EACH_TICK">FALSE</field>
+        <field name="CURRENCY_LIST">USD</field>
+        <value name="DURATION" strategy_value="duration">
+          <shadow type="math_number_positive">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="AMOUNT">
+          <shadow type="math_number_positive">
+            <field name="NUM">1</field>
+          </shadow>
+          <block type="variables_get">
+            <field name="VAR" id="stake_var">Stake</field>
+          </block>
+        </value>
+        <value name="PREDICTION">
+          <shadow type="math_number_positive">
+            <field name="NUM">0</field>
+          </shadow>
+          <block type="variables_get">
+            <field name="VAR" id="prediction_var">Prediction</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="after_purchase" id="ai_scanner_after_purchase" x="860" y="60">
+    <statement name="AFTERPURCHASE_STACK">
+      <block type="controls_if" id="ai_scanner_after_purchase_result">
+        <mutation else="1"></mutation>
+        <value name="IF0">
+          <block type="contract_check_result">
+            <field name="CHECK_RESULT">win</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="variables_set" id="ai_scanner_reset_stake">
+            <field name="VAR" id="stake_var">Stake</field>
+            <value name="VALUE">
+              <block type="variables_get">
+                <field name="VAR" id="initial_stake_var">Initial Stake</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="ai_scanner_reset_prediction">
+                <field name="VAR" id="prediction_var">Prediction</field>
+                <value name="VALUE">
+                  <block type="variables_get">
+                    <field name="VAR" id="entry_prediction_var">Initial Prediction</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="variables_set" id="ai_scanner_use_recovery_prediction">
+            <field name="VAR" id="prediction_var">Prediction</field>
+            <value name="VALUE">
+              <block type="variables_get">
+                <field name="VAR" id="recovery_prediction_var">Recovery Prediction</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if" id="ai_scanner_martingale_logic">
+                <mutation else="1"></mutation>
+                <value name="IF0">
+                  <block type="logic_compare">
+                    <field name="OP">EQ</field>
+                    <value name="A">
+                      <block type="variables_get">
+                        <field name="VAR" id="use_martingale_var">Use Martingale</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="logic_boolean">
+                        <field name="BOOL">TRUE</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="variables_set" id="ai_scanner_apply_martingale">
+                    <field name="VAR" id="stake_var">Stake</field>
+                    <value name="VALUE">
+                      <block type="math_arithmetic">
+                        <field name="OP">MULTIPLY</field>
+                        <value name="A">
+                          <shadow type="math_number">
+                            <field name="NUM">0.5</field>
+                          </shadow>
+                          <block type="variables_get">
+                            <field name="VAR" id="stake_var">Stake</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <shadow type="math_number">
+                            <field name="NUM">1</field>
+                          </shadow>
+                          <block type="variables_get">
+                            <field name="VAR" id="martingale_var">Martingale</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+                <statement name="ELSE">
+                  <block type="variables_set" id="ai_scanner_reset_stake_no_martingale">
+                    <field name="VAR" id="stake_var">Stake</field>
+                    <value name="VALUE">
+                      <block type="variables_get">
+                        <field name="VAR" id="initial_stake_var">Initial Stake</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="controls_if" id="ai_scanner_stop_checks">
+            <mutation elseif="1" else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_compare">
+                <field name="OP">GTE</field>
+                <value name="A">
+                  <block type="total_profit"></block>
+                </value>
+                <value name="B">
+                  <block type="variables_get">
+                    <field name="VAR" id="take_profit_var">Take Profit</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="text_print">
+                <value name="TEXT">
+                  <shadow type="text">
+                    <field name="TEXT">Take Profit Hit</field>
+                  </shadow>
+                </value>
+              </block>
+            </statement>
+            <value name="IF1">
+              <block type="logic_compare">
+                <field name="OP">LTE</field>
+                <value name="A">
+                  <block type="total_profit"></block>
+                </value>
+                <value name="B">
+                  <block type="math_single">
+                    <field name="OP">NEG</field>
+                    <value name="NUM">
+                      <shadow type="math_number">
+                        <field name="NUM">50</field>
+                      </shadow>
+                      <block type="variables_get">
+                        <field name="VAR" id="stop_loss_var">Stop Loss</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO1">
+              <block type="text_print">
+                <value name="TEXT">
+                  <shadow type="text">
+                    <field name="TEXT">Stop Loss Hit</field>
+                  </shadow>
+                </value>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="trade_again"></block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="before_purchase" id="ai_scanner_before_purchase" deletable="false" x="0" y="1130">
+    <statement name="BEFOREPURCHASE_STACK">
+      <block type="apollo_purchase" id="ai_scanner_purchase">
+        <field name="PURCHASE_LIST">DIGITUNDER</field>
+        <field name="MULTIPLE_CONTRACTS">FALSE</field>
+        <field name="CONTRACT_QUANTITY">1</field>
+      </block>
+    </statement>
+  </block>
+</xml>
