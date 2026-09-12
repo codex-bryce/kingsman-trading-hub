@@ -16,11 +16,11 @@ const SecurityProtection: React.FC = () => {
 
     // Disable right-click (desktop only - mobile needs context menu for some features)
     const disableRightClick = (e: MouseEvent) => {
-      if (!isMobile && (e.button === 2 || e.which === 3)) {
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-      }
+      // if (!isMobile && (e.button === 2 || e.which === 3)) {
+      //   e.preventDefault();
+      //   e.stopPropagation();
+      //   return false;
+      // }
     };
 
     // Disable context menu (desktop only)
